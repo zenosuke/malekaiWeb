@@ -1,0 +1,9 @@
+@import '~@angular/material/_theming.scss';
+
+@mixin material($theme) {
+  $primary: map-get($theme, primary);
+  .mat-autocomplete-panel .mat-option:first-child.auto-select {
+
+    background-color: mat-color($primary);
+  }
+}

@@ -1,0 +1,36 @@
+:host {
+
+  position: relative;
+  top: 2rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+
+  md-card.box {
+    max-width: 25em;
+    width: 100%;
+    margin: 20px;
+
+    p {
+      width: 100;
+      display: flex;
+      align-items: center;
+
+      > md-input-container {
+        font-size: 1rem;
+        width: 100%;
+        margin-right: 2rem;
+      }
+
+      > md-select {
+        margin-bottom: 8px; // right now, so it lines up
+        > md-option {
+
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<md-card id='input' class='box'>
+  <md-card-header>
+    <md-card-title>
+      Crowfall DB Lookup
+    </md-card-title>
+  </md-card-header>
+  <md-card-content>
+
+    <div id='input'>
+      <form [formGroup]='lookupForm' novalidate>
+        <p>
+
+          <md-input-container color='primary' hideRequiredMarker>
+            <input #nameInput mdInput type='text' formControlName='object' required [mdAutocomplete]='auto' placeholder='name' name='name' (keydown)='keydown($event)' />
+          </md-input-container>
+
+          <md-autocomplete #auto='mdAutocomplete' [displayWith]='getName'>
+            <md-option class='auto-select' *ngFor='let obj of filteredObjects | async' [value]='obj'>
+              {{obj.name}}
+            </md-option>
+          </md-autocomplete>
+
+          <md-select placeholder='type' formControlName='type'>
+            <md-option *ngFor='let t of types' [value]='t'>{{t}}</md-option>
+          </md-select>
+        </p>
+      </form>
+    </div>
+  </md-card-content>
+  <md-card-actions style='display: flex; flex-flow: row-reverse'>
+    <button md-button (click)='submit()'>submit</button>
+  </md-card-actions>
+</md-card>
+
+<md-card id='output' class='box' *ngIf='selected'>
+  <md-card-header>
+    <md-card-title>
+      {{selected.name}}
+    </md-card-title>
+  </md-card-header>
+  <md-card-content style='white-space: pre-wrap'>
+    {{stringify(selected, 5)}}
+  </md-card-content>
+</md-card>

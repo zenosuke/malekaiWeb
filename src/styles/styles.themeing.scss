@@ -1,0 +1,40 @@
+@import '~@angular/material/_theming.scss';
+
+@mixin styles($theme) {
+  $primary: map-get($theme, primary);
+  a {
+    cursor: pointer;
+    text-decoration: underline;
+
+    color: mat-color($primary);
+    &:hover {
+      color: mat-color($primary, 300);
+    }
+    &:visited {
+      color: mat-color($primary);
+    }
+
+    &.clean {
+      text-decoration: none;
+    }
+
+    &.accent {
+      $accent: map-get($theme, accent);
+
+      color: mat-color($accent);
+      &:hover {
+        color: mat-color($accent, A100);
+      }
+      &:visited {
+        color: mat-color($accent);
+      }
+    }
+  }
+
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  body, app-root, .mat-app-background {
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+}

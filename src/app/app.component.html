@@ -1,0 +1,14 @@
+<md-toolbar id='header' color='primary'>
+  <div>
+    <a id='logo' routerLink='/'></a>
+    <a routerLink='/'>the malekai project</a>
+  </div>
+</md-toolbar>
+
+<div id='content'>
+  <router-outlet #outlet>
+    <div id='spinner' *ngIf='outlet.isActivated == false'>
+      <md-spinner strokeWidth='8px' color='primary'></md-spinner>
+    </div>
+  </router-outlet>
+</div>

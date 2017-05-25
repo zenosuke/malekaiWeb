@@ -1,0 +1,47 @@
+md-toolbar#header {
+
+    div {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      * {
+        color: inherit !important;
+        text-decoration: none;
+      }
+
+      *:not(:last-child) {
+        margin-right: 1rem;
+      }
+
+      a#logo {
+        background-image: url('../assets/gfx/logo.png');
+        width: 50px;
+        height: 50px;
+        background-position-x: center;
+        background-position-y: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+}
+
+
+div#spinner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+div#content {
+  display: relative;
+  width: 100%;
+}
