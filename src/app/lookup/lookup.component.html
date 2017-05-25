@@ -34,11 +34,85 @@
 
 <md-card id='output' class='box' *ngIf='selected'>
   <md-card-header>
+    <div id='icon' md-card-avatar [style.backgroundImage]='getIconStyle() | safeStyle'></div>
     <md-card-title>
       {{selected.name}}
     </md-card-title>
+    <md-card-subtitle>
+      {{getType()}}
+    </md-card-subtitle>
   </md-card-header>
-  <md-card-content style='white-space: pre-wrap'>
-    {{stringify(selected, 5)}}
+  <md-card-content>
+
+    <div *ngIf='getBaseType() == "Discipline"'>
+
+      <div *ngIf='exists(selected.can_equip)'>
+        <span class='label'>Equippable Classes</span>
+        <p class='item queries'>
+          <button md-button color='primary' *ngFor='let class of selected.can_equip' (click)='search(class, "class")'>{{class}}</button>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.stats_values) && exists(selected.stats_granted)'>
+        <span class='label'>Stats</span>
+        <p class='item stats'>
+          <md-chip-list selectable='false'>
+            <md-chip color='primary' selected='true' *ngFor='let statName of selected.stats_granted; let i = index'>
+              <span>{{statName}}</span>
+              <span>{{formatNumber(selected.stats_values[i])}}</span>
+            </md-chip>
+          </md-chip-list>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.powers_granted)'>
+        <span class='label'>Powers Granted</span>
+        <p class='item queries'>
+          <button md-button color='primary' *ngFor='let power of selected.powers_granted' (click)='search(power, "power")'>{{power}}</button>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.equips_granted)'>
+        <span class='label'>Equips Granted</span>
+        <p class='item list'>
+          <span *ngFor='let e of selected.equips_granted'>{{e}}</span>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.slots_granted)'>
+        <span class='label'>Slots Granted</span>
+        <p class='item list'>
+          <span *ngFor='let s of selected.slots_granted'>{{s}}</span>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.slots_removed)'>
+        <span class='label'>Slots Removed</span>
+        <p class='item list'>
+          <span *ngFor='let s of selected.slots_removed'>{{s}}</span>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.trays_granted)'>
+        <span class='label'>Trays Granted</span>
+        <p class='item list'>
+          <span *ngFor='let t of selected.trays_granted'>{{t}}</span>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.trays_removed)'>
+        <span class='label'>Trays Removed</span>
+        <p class='item list'>
+          <span *ngFor='let t of selected.trays_removed'>{{t}}</span>
+        </p>
+      </div>
+
+      <div *ngIf='exists(selected.description)'>
+        <span class='label'>Description</span>
+        <p class='item text'>{{selected.description}}</p>
+      </div>
+
+    </div>
+
   </md-card-content>
 </md-card>

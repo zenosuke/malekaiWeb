@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { MaterialModule } from './shared';
 import { ServicesModule } from './services';
+import { PipesModule } from './pipes';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { LookupComponent } from './lookup';
 
     MaterialModule,
     ServicesModule,
+    PipesModule,
 
     AppRoutingModule
   ],

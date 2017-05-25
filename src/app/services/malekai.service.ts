@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
 
+import { RaceService } from './race.service';
+import { ClassService } from './class.service';
 import { DisciplineService } from './discipline.service';
+import { PowerService } from './power.service';
 
 @Injectable()
 export class MalekaiService {
@@ -22,18 +24,23 @@ export class MalekaiService {
   public get onInitError() { return this._onInitError; }
   public get onUninit() { return this._onUninit; }
 
-  get discCache(){ return this.discService.cache; }
+  get raceCache() { return this.raceService.cache; }
+  get classCache() { return this.classService.cache; }
+  get discCache() { return this.discService.cache; }
+  get powerCache() { return this.powerService.cache; }
 
-  constructor(private http: Http, private discService: DisciplineService) {
-
-  }
+  constructor(private raceService: RaceService, private classService: ClassService,
+              private discService: DisciplineService, private powerService: PowerService) { }
 
   init(): void {
     if(this._initialized && !this._initializing) return;
     this._initializing = true;
 
     Promise.all([
+      this.raceService.getAll().toPromise(),
+      this.classService.getAll().toPromise(),
       this.discService.getAll().toPromise(),
+      this.powerService.getAll().toPromise() // page it so we don't have huge requests
     ]).then(stuff => {
 
       console.log('Initialized!');
