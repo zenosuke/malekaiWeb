@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
+import { CacheService } from './cache.service';
+import { ErrorService } from './error.service';
 import { Class } from '../data';
 
 import { environment } from '../../environments/environment';
@@ -12,16 +14,15 @@ export class ClassService {
 
   static get urlSeg(): string { return '/classes'; }
   get url(): string { return environment.apiUrl + ClassService.urlSeg; }
-
-  private _cache: Class[] = [];
-  public get cache(): Class[] { return this._cache.map(a => new Class(a)); }
+  get type(): string { return 'Class'; }
 
   private noop = () => undefined;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private cacheService: CacheService,
+              private errorService: ErrorService) { }
 
   private handleError(res: Response) {
-    return Observable.throw(res.statusText); // parse res.text, res.json().message, etc
+    return this.errorService.handleError(res); // parse res.text, res.json().message, etc
   }
 
   getAll(): Observable<Class[]> {
@@ -32,7 +33,7 @@ export class ClassService {
                 })
                 .catch(err => this.handleError(err))
                 .publish();
-      obs.toPromise().then(classes => this._cache = classes, this.noop);
+      obs.toPromise().then(classes => this.cacheService.updateAllOfType(this.type, classes), this.noop);
       obs.connect();
       return obs;
   }
@@ -42,7 +43,7 @@ export class ClassService {
                 .map(res => Class.deserialize(res.json()))
                 .catch(err => this.handleError(err))
                 .publish();
-    // obs.toPromise().then(disc => null, this.noop); -- update the cache
+    obs.toPromise().then(clas => this.cacheService.update(clas), this.noop);
     obs.connect();
     return obs;
   }

@@ -1,30 +1,75 @@
 md-toolbar#header {
 
-    div {
+  div#wrapper {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    > div#main {
 
       display: flex;
       justify-content: center;
       align-items: center;
 
-      * {
+      > * {
         color: inherit !important;
         text-decoration: none;
-      }
 
-      *:not(:last-child) {
-        margin-right: 1rem;
+        &:not(:last-child) {
+          margin-right: 1rem;
+        }
       }
 
       a#logo {
         background-image: url('../assets/gfx/logo.png');
         width: 50px;
         height: 50px;
-        background-position-x: center;
-        background-position-y: center;
+        background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
       }
     }
+
+    > div#nav {
+      display: flex;
+    }
+  }
+}
+
+div#tabs {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+div#content {
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+}
+
+md-toolbar#footer {
+  a {
+    color: inherit !important;
+  }
+
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  > * {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+
+  p {
+    text-align: center;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+  }
 }
 
 
@@ -38,10 +83,4 @@ div#spinner {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-
-div#content {
-  display: relative;
-  width: 100%;
 }

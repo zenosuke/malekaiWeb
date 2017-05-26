@@ -1,4 +1,9 @@
-export class Class {
+import { IDataObject } from './interfaces';
+
+export class Class implements IDataObject {
+
+  get dataType(): string { return 'Class'; }
+  get baseType(): string { return 'Class'; }
 
   name: string;
   description: string;
@@ -35,5 +40,18 @@ export class Class {
       icon: this.icon,
       races: this.races.slice()
     };
+  }
+
+  setTo(other): void {
+    if(!(other instanceof Class)) return;
+
+    this.name = other.name;
+    this.description = other.description;
+    this.icon = other.icon;
+    this.races = other.races.slice();
+  }
+
+  clone(): Class {
+    return new Class(this);
   }
 }

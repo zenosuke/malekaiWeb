@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
+import { CacheService } from './cache.service';
+import { ErrorService } from './error.service';
 import { Power } from '../data';
 
 import { environment } from '../../environments/environment';
@@ -12,16 +14,15 @@ export class PowerService {
 
   static get urlSeg(): string { return '/powers'; }
   get url(): string { return environment.apiUrl + PowerService.urlSeg; }
-
-  private _cache: Power[] = [];
-  public get cache(): Power[] { return this._cache.map(a => new Power(a)); }
+  get type(): string { return 'Power'; }
 
   private noop = () => undefined;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private cacheService: CacheService,
+              private errorService: ErrorService) { }
 
   private handleError(res: Response) {
-    return Observable.throw(res.statusText); // parse res.text, res.json().message, etc
+    return this.errorService.handleError(res); // parse res.text, res.json().message, etc
   }
 
   getAll(): Observable<Power[]> {
@@ -32,7 +33,7 @@ export class PowerService {
                 })
                 .catch(err => this.handleError(err))
                 .publish();
-      obs.toPromise().then(powers => this._cache = powers, this.noop);
+      obs.toPromise().then(powers => this.cacheService.updateAllOfType(this.type, powers), this.noop);
       obs.connect();
       return obs;
   }
@@ -42,7 +43,7 @@ export class PowerService {
                 .map(res => Power.deserialize(res.json()))
                 .catch(err => this.handleError(err))
                 .publish();
-    // obs.toPromise().then(disc => null, this.noop); -- update the cache
+    obs.toPromise().then(power => this.cacheService.update(power), this.noop);
     obs.connect();
     return obs;
   }

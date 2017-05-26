@@ -1,4 +1,9 @@
-export class Discipline {
+import { IDataObject } from './interfaces';
+
+export class Discipline implements IDataObject {
+
+  get dataType(): string { return (this.type + ' Discipline').trim(); }
+  get baseType(): string { return 'Discipline'; }
 
   name: string; // i.e. "Agent Provocateur"
   description: string; // i.e. "Agent Provocateurs are sneaky, well-hidden, and difficult to track."
@@ -118,5 +123,34 @@ export class Discipline {
 
       powers_granted: this.powers_granted,
     };
+  }
+
+  setTo(other): void {
+    if(!(other instanceof Discipline)) return;
+
+    this.name = other.name;
+    this.description = other.description;
+    this.type = other.type;
+
+    this.icon = other.icon;
+
+    this.can_equip = other.can_equip.slice();
+
+    this.stats_granted = other.stats_granted.slice();
+    this.stats_values = other.stats_values.slice();
+
+    this.equips_granted = other.equips_granted.slice();
+
+    this.slots_granted = other.slots_granted.slice();
+    this.slots_removed = other.slots_removed.slice();
+
+    this.trays_granted = other.trays_granted;
+    this.trays_removed = other.trays_removed;
+
+    this.powers_granted = other.powers_granted.slice();
+  }
+
+  clone(): Discipline {
+    return new Discipline(this);
   }
 }

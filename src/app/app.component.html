@@ -1,14 +1,34 @@
-<md-toolbar id='header' color='primary'>
-  <div>
-    <a id='logo' routerLink='/'></a>
-    <a routerLink='/'>the malekai project</a>
+<md-toolbar id='header' color='primary' class='shadow'>
+  <div id='wrapper'>
+    <div id='main'>
+      <a id='logo' routerLink='/'></a>
+      <a routerLink='/'>Crowfall.wiki</a>
+    </div>
+
+    <div id='nav'>
+      <button md-button *ngFor='let tab of nav' [routerLink]='tab.url'>{{tab.name}}</button>
+      <malekai-quick-search></malekai-quick-search>
+    </div>
   </div>
 </md-toolbar>
 
-<div id='content'>
+<div #elTop id='tabs'>
+  <button md-button *ngFor='let tab of tabs' [routerLink]='tab.url'>{{tab.name}}</button>
+</div>
+
+<div id='content' [style.top.px]='top' [style.bottom.px]='bottom'>
   <router-outlet #outlet>
     <div id='spinner' *ngIf='outlet.isActivated == false'>
       <md-spinner strokeWidth='8px' color='primary'></md-spinner>
     </div>
   </router-outlet>
 </div>
+
+<md-toolbar #elBottom id='footer' color='primary' class='shadow-reverse'>
+  <p>
+    <a routerLink='/'>crowfall.wiki</a>, brought to you by <a href='https://stealthed.blog/'>Stealthed</a> and the <a href='https://obsidian.wiki/'>Obsidian</a> organization
+  </p>
+  <p>
+    Some icons used with permission from <a href='https://artcraftent.com'>Art Craft Entertainment</a>, (c) 2017, all rights reserved
+  </p>
+</md-toolbar>

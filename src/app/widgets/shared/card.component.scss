@@ -1,0 +1,70 @@
+:host {
+  display: block;
+
+  md-card {
+    width: 100%;
+
+    div#icon {
+      border-radius: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    md-card-content {
+
+      display: flex;
+      flex-flow: column;
+
+      div {
+        width: 100%;
+        > span.label {
+          width: 100%;
+          padding: 0.1em;
+        }
+        > p.item {
+
+          margin-left: 3rem;
+
+          &.queries {
+            > a {
+              text-decoration: none;
+              padding: 0.5em;
+            }
+          }
+
+          &.stats {
+            md-chip {
+
+              > span:last-child {
+                margin-left: 0.5em;
+                font-family: 'Roboto Mono', monospace;
+                font-size: 1em;
+              }
+            }
+          }
+
+          &.stats-reverse {
+            md-chip {
+
+              > span:first-child {
+                margin-right: 0.5em;
+                font-family: 'Roboto Mono', monospace;
+                font-size: 1em;
+              }
+            }
+          }
+
+          &.list {
+
+          }
+
+          &.text {
+            line-height: 2em;
+            white-space: pre-wrap;
+          }
+        }
+      }
+    }
+  }
+}

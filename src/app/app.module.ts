@@ -6,15 +6,20 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from './shared';
 import { ServicesModule } from './services';
 import { PipesModule } from './pipes';
+import { WidgetsModule } from './widgets';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LookupComponent } from './lookup';
+
+import { AllComponent } from './pages/all';
+import { DisciplinesComponent } from './pages/disciplines';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LookupComponent
+
+    AllComponent,
+    DisciplinesComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,7 @@ import { LookupComponent } from './lookup';
     MaterialModule,
     ServicesModule,
     PipesModule,
+    WidgetsModule,
 
     AppRoutingModule
   ],

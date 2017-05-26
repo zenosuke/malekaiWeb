@@ -1,0 +1,77 @@
+<md-card>
+  <md-card-header class='color-primary'>
+    <div id='icon' md-card-avatar [style.backgroundImage]='getIconStyle() | safeStyle'></div>
+    <md-card-title>
+      {{data.name}}
+    </md-card-title>
+    <md-card-subtitle>
+      {{data.dataType}}
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+
+    <div *ngIf='exists(data.tooltip)'>
+      <span class='label'>Tooltip</span>
+      <p class='item text'>{{data.tooltip}}</p>
+    </div>
+
+    <div *ngIf='exists(data.type)'>
+      <span class='label'>Type</span>
+      <p class='item text'>{{data.type}}</p>
+    </div>
+
+    <div *ngIf='exists(data.cast_type)'>
+      <span class='label'>Cast Type</span>
+      <p class='item text'>{{data.cast_type}}</p>
+    </div>
+
+    <div *ngIf='exists(data.cost) && (exists(data.cost.pips) || exists(data.cost.resource))'>
+      <span class='label'>Cost</span>
+      <p class='item stats-reverse'>
+        <md-chip-list selectable='false'>
+          <md-chip *ngIf='exists(data.cost.pips)' color='accent' data='true'>
+            <span>{{data.cost.pips}}</span>
+            <span>Pips</span>
+          </md-chip>
+          <md-chip *ngIf='exists(data.cost.resource)' color='accent' data='true'>
+            <span>{{data.cost.resource}}</span>
+            <span>Resource</span>
+          </md-chip>
+        </md-chip-list>
+      </p>
+    </div>
+
+    <div *ngIf='exists(data.duration)'>
+      <span class='label'>Duration</span>
+      <p class='item text'>{{data.duration}}</p>
+    </div>
+
+    <div *ngIf='exists(data.cooldown)'>
+      <span class='label'>Cooldown</span>
+      <p class='item text'>{{data.cooldown}}</p>
+    </div>
+
+    <div *ngIf='exists(data.targeting)'>
+      <span class='label'>Targeting</span>
+      <p class='item text'>{{data.targeting}}</p>
+    </div>
+
+    <div *ngIf='exists(data.max_targets)'>
+      <span class='label'>Max Targets</span>
+      <p class='item text'>{{data.max_targets}}</p>
+    </div>
+
+    <div *ngIf='exists(data.range)'>
+      <span class='label'>Range</span>
+      <p class='item text'>{{data.range}}</p>
+    </div>
+
+    <div *ngIf='exists(data.next_chain)'>
+      <span class='label'>Next in Chain</span>
+      <p class='item queries'>
+        <button md-button color='accent' *ngFor='let power of data.next_chain' (click)='search(power, "power")'>{{power}}</button>
+      </p>
+    </div>
+
+  </md-card-content>
+</md-card>

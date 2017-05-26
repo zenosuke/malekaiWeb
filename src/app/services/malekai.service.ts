@@ -24,11 +24,6 @@ export class MalekaiService {
   public get onInitError() { return this._onInitError; }
   public get onUninit() { return this._onUninit; }
 
-  get raceCache() { return this.raceService.cache; }
-  get classCache() { return this.classService.cache; }
-  get discCache() { return this.discService.cache; }
-  get powerCache() { return this.powerService.cache; }
-
   constructor(private raceService: RaceService, private classService: ClassService,
               private discService: DisciplineService, private powerService: PowerService) { }
 

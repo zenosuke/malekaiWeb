@@ -1,4 +1,9 @@
-export class Power {
+import { IDataObject } from './interfaces';
+
+export class Power implements IDataObject {
+
+  get dataType(): string { return 'Power'; }
+  get baseType(): string { return 'Power'; }
 
   name: string;
   tooltip: string;
@@ -8,13 +13,15 @@ export class Power {
 
   type: string;
   cast_type: string;
-  cost: { pips: number, resource: number };
 
+  cost: { pips: number, resource: number };
   duration: number;
   cooldown: number;
+
   targeting: string;
   max_targets: number;
   range: number;
+
   next_chain: string[];
 
   static deserialize(obj: any): Power {
@@ -82,5 +89,27 @@ export class Power {
       range: this.range,
       next_chain: this.next_chain.slice()
     };
+  }
+
+  setTo(other): void {
+    if(!(other instanceof Power)) return;
+
+    this.name = other.name;
+    this.tooltip = other.tooltip;
+    this.icon = other.icon;
+    this.source = other.source;
+    this.type = other.type;
+    this.cast_type = other.cast_type;
+    this.cost = { pips: other.cost.pips, resource: other.cost.resource };
+    this.duration = other.duration;
+    this.cooldown = other.cooldown;
+    this.targeting = other.targeting;
+    this.max_targets = other.max_targets;
+    this.range = other.range;
+    this.next_chain = other.next_chain;
+  }
+
+  clone(): Power {
+    return new Power(this);
   }
 }

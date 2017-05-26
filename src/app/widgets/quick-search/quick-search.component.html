@@ -1,0 +1,10 @@
+<md-input-container hideRequiredMarker>
+  <input #input mdInput type='text' [formControl]='inputController' [mdAutocomplete]='auto' placeholder='quick search' name='quick search' (keydown)='keydown($event)' />
+  <a mdSuffix (click)='clear()'><md-icon>close</md-icon></a>
+</md-input-container>
+
+<md-autocomplete #auto='mdAutocomplete' [displayWith]='getName'>
+  <md-option class='auto-select' *ngFor='let obj of filteredObjects | async' [value]='obj'>
+    {{obj.name}}
+  </md-option>
+</md-autocomplete>

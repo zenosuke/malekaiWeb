@@ -5,5 +5,24 @@
   .mat-autocomplete-panel .mat-option:first-child.auto-select {
 
     background-color: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+
+  md-card-header.color-primary {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    position: relative;
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    top: -24px;
+    left: -24px;
+    width: calc(100% + 48px);
+    background-color: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+
+    md-card-subtitle {
+      color: mat-color($primary, default-contrast, 0.6);
+    }
   }
 }

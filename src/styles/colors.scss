@@ -1,22 +1,21 @@
 @import '~@angular/material/_theming.scss';
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-$primary: mat-palette($mat-indigo);
+$black-87-opacity: rgba(black, 0.87);
+$white-87-opacity: rgba(white, 0.87);
+$black-12-opacity: rgba(black, 0.12);
+$white-12-opacity: rgba(white, 0.12);
+$black-6-opacity: rgba(black, 0.06);
+$white-6-opacity: rgba(white, 0.06);
 
-$accent: mat-palette($mat-amber);
+// choose for contrast:
+// black-87-opacity, white, or white-87-opacity
+
+$primary: mat-palette($mat-grey, 900, 800, 1000);
+
+$accent: mat-palette($mat-indigo, 400, 200, 600);
 
 // The warn palette is optional (defaults to red).
 $warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary, $accent, $warn);
-
-$primary-dark: mat-palette($mat-blue);
-
-$accent-dark: mat-palette($mat-amber, A200, A100, A400);
-
-$warn-dark: mat-palette($mat-deep-orange);
-
-$theme-dark: mat-dark-theme($primary-dark, $accent-dark, $warn-dark);

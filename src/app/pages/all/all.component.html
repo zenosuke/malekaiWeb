@@ -1,0 +1,15 @@
+<div id='header'>
+  <span id='title'>Start {{searchText}}</span>
+  <md-input-container floatPlaceholder='never'>
+    <input mdInput #elInput type='text' [formControl]='inputController' [placeholder]='placeholderText' name='search' (keydown)='keydown($event)' />
+  </md-input-container>
+</div>
+
+<div #elResults id='results'>
+  <ng-template ngFor [ngForOf]='results' let-result>
+    <malekai-race-card *ngIf='result.baseType === "Race"' [data]='result' (search)='search($event.name, $event.type)'></malekai-race-card>
+    <malekai-class-card *ngIf='result.baseType === "Class"' [data]='result' (search)='search($event.name, $event.type)'></malekai-class-card>
+    <malekai-discipline-card *ngIf='result.baseType === "Discipline"' [data]='result' (search)='search($event.name, $event.type)'></malekai-discipline-card>
+    <malekai-power-card *ngIf='result.baseType === "Power"' [data]='result' (search)='search($event.name, $event.type)'></malekai-power-card>
+  </ng-template>
+</div>

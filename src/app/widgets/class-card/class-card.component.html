@@ -1,0 +1,26 @@
+<md-card>
+  <md-card-header class='color-primary'>
+    <div id='icon' md-card-avatar [style.backgroundImage]='getIconStyle() | safeStyle'></div>
+    <md-card-title>
+      {{data.name}}
+    </md-card-title>
+    <md-card-subtitle>
+      {{data.dataType}}
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+
+    <div *ngIf='exists(data.races)'>
+      <span class='label'>Useable Races</span>
+      <p class='item queries'>
+        <button md-button color='accent' *ngFor='let race of data.races' (click)='search(race, "race")'>{{race}}</button>
+      </p>
+    </div>
+
+    <div *ngIf='exists(data.description)'>
+      <span class='label'>Description</span>
+      <p class='item text'>{{data.description}}</p>
+    </div>
+
+  </md-card-content>
+</md-card>

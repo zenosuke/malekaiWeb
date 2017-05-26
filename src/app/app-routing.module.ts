@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
 
-import { LookupComponent } from './lookup';
+import { AllComponent } from './pages/all';
+import { DisciplinesComponent } from './pages/disciplines';
 
 const routes: Routes = [
   {
@@ -12,7 +13,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LookupComponent
+        component: AllComponent,
+      },
+      {
+        path: 'disciplines',
+        component: DisciplinesComponent
       }
     ]
   }
